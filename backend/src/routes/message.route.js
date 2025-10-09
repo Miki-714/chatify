@@ -9,7 +9,7 @@ import { getChatPartners } from "../controllers/message.controller.js";
 import { arcjetProtection } from "../middleware/arcjet.middleware.js";
 
 const router = express.Router();
-// Protect all routes after this middleware i need that
+// Protect all routes after this middleware i need that i
 router.use(arcjetProtection, protectedRoute);
 
 router.get("/contacts", getAllContacts);
