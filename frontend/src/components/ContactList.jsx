@@ -1,9 +1,41 @@
-import React from 'react'
+import React, { useEffect } from "react";
+import { useChatStore } from "../store/useChatStore";
+import UsersLoadingSkeleton from "./UsersLoadingSkeleton";
 
 function ContactList() {
-  return (
-    <div>ContactList</div>
-  )
-}
+  const { getAllContacts, allContacts, isUsersLoading, setSelectedUser } =
+    useChatStore();
 
-export default ContactList
+  useEffect(() => {
+    getAllContacts();
+  }, [getAllContacts]);
+
+  if (isUsersLoading) return <UsersLoadingSkeleton />;
+
+  return (
+    <>
+      {allContacts.map((constact) => (
+        <div
+          key={constact._id}
+          className="bg-cyan-500/10 p-4 rounded-lg cursor-pointer hover:bg-cyan-500/20 transition-colors"
+          onClick={() => setSelectedUser(constact)}
+        >
+          <div className="flex items-center gap-3">
+            <div className={`avatar online`}>
+              <div className="size-12 rounded-full">
+                <img
+                  src={constact.profilePic || "/avatar.png"}
+                  alt={constact.fullName}
+                />
+              </div>
+            </div>
+            <h4 className="text-slate-200 font-medium truncate">
+              {constact.fullName}
+            </h4>
+          </div>
+        </div>
+      ))}
+    </>
+  );
+}
+export default ContactList;
