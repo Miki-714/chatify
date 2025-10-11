@@ -13,7 +13,7 @@ function ActiveTabSwitch() {
             : "text-slate-400"
         }`}
       >
-        Charts
+        Chats
       </button>
       <button
         onClick={() => setActiveTab("contacts")}
