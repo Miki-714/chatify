@@ -22,7 +22,7 @@ function SignUpPage() {
     e.preventDefault();
     signup(formData);
   };
-
+  //i need some edit
   return (
     <div className="w-full flex items-center justify-center p-4 bg-slate-900">
       <div className="relative w-full max-w-6xl md:h-[800px] h-[650px]">
