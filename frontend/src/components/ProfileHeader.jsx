@@ -81,9 +81,7 @@ function ProfileHeader() {
             onClick={() => {
               // play click sound before toggling
               mouseClickSound.currentTime = 0; // reset to start
-              mouseClickSound
-                .play()
-                .catch((error) => console.log("Audio play failed:", error));
+              mouseClickSound.play().catch((error) => console.log("Audio play failed:", error));
               toggleSound();
             }}
           >

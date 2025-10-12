@@ -23,36 +23,22 @@ export function getReceiverSocketId(userId) {
 }
 
 // this is for storig online users
-const userSocketMap = {}; // { userId: Set<socketId> }
+const userSocketMap = {}; // {userId:socketId}
 
 io.on("connection", (socket) => {
   console.log("A user connected", socket.user.fullName);
 
   const userId = socket.userId;
-  if (!userSocketMap[userId]) {
-    userSocketMap[userId] = new Set();
-  }
-  userSocketMap[userId].add(socket.id);
+  userSocketMap[userId] = socket.id;
 
   // io.emit() is used to send events to all connected clients
-  io.emit(
-    "getOnlineUsers",
-    Object.keys(userSocketMap).filter((id) => userSocketMap[id]?.size)
-  );
+  io.emit("getOnlineUsers", Object.keys(userSocketMap));
 
   // with socket.on we listen for events from clients
   socket.on("disconnect", () => {
     console.log("A user disconnected", socket.user.fullName);
-    const sockets = userSocketMap[userId];
-    if (sockets) {
-      if (sockets.size === 0) {
-        delete userSocketMap[userId];
-      }
-    }
-    io.emit(
-      "getOnlineUsers",
-      Object.keys(userSocketMap).filter((id) => userSocketMap[id]?.size)
-    );
+    delete userSocketMap[userId];
+    io.emit("getOnlineUsers", Object.keys(userSocketMap));
   });
 });
 

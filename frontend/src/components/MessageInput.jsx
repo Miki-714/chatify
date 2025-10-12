@@ -23,7 +23,7 @@ function MessageInput() {
       image: imagePreview,
     });
     setText("");
-    setImagePreview(null);
+    setImagePreview("");
     if (fileInputRef.current) fileInputRef.current.value = "";
   };
 
@@ -43,6 +43,7 @@ function MessageInput() {
     setImagePreview(null);
     if (fileInputRef.current) fileInputRef.current.value = "";
   };
+
   return (
     <div className="p-4 border-t border-slate-700/50">
       {imagePreview && (
@@ -63,10 +64,8 @@ function MessageInput() {
           </div>
         </div>
       )}
-      <form
-        onSubmit={handleSendMessage}
-        className="max-w-3xl mx-auto flex space-x-4"
-      >
+
+      <form onSubmit={handleSendMessage} className="max-w-3xl mx-auto flex space-x-4">
         <input
           type="text"
           value={text}
@@ -106,5 +105,4 @@ function MessageInput() {
     </div>
   );
 }
-
 export default MessageInput;
