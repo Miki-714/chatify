@@ -8,10 +8,11 @@ export const sendWelcomeEmail = async (email, name, clientURL) => {
     subject: "Welcome to Chatify!",
     html: createWelcomeEmailTemplate(name, clientURL),
   });
+
   if (error) {
     console.error("Error sending welcome email:", error);
     throw new Error("Failed to send welcome email");
-  } else {
-    console.log("Welcome email sent successfully:", data);
   }
+
+  console.log("Welcome Email sent successfully", data);
 };
